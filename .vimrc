@@ -55,13 +55,16 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'ervandew/supertab'
+
+" Add a undo history
+Plug 'mbbill/undotree'
+
+" End Plugins
 call plug#end()
 
 " Remapping plug keybindings
 map <leader>g :Ack
-map ; :GFiles<CR>
 map <leader>ss :setlocal spell!<cr>
-map <leader>nt :NERDTreeToggle<CR>
 let g:ctrlp_map = '<leader>f'
 let g:ctrlp_cmd = 'CtrlP'
 nmap <leader>p <Plug>yankstack_substitute_older_paste
@@ -80,7 +83,9 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 
-" Tagbar keybind
+" Function windowed plugin keybindings
+nmap <F6> :NERDTreeToggle<CR>
+nnoremap <F5> :UndotreeToggle<CR>
 nmap <F8> :TagbarToggle<CR>
 
 " Remove the press enter prompt
