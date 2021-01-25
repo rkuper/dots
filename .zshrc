@@ -11,6 +11,7 @@ compinit
 # End of lines added by compinstall
 
 autoload -U colors && colors
+# export PS1="\[\e[37m\][\[\e[m\]\[\e[36m\]\u\[\e[m\]\[\e[37m\]:\[\e[33m\]\w\[\e[m\]\[\e[37m\]]\[\e[m\]\[\e[37m\]\\$\[\e[m\] "
 export PS1="[%{$fg[cyan]%}%n%{$reset_color%}:%{$fg[yellow]%}%~%{$reset_color%}]$ "
 
 alias q='exit'
