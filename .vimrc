@@ -2,7 +2,8 @@
 "   Useful Vim Startup Commands   "
 """""""""""""""""""""""""""""""""""
 
-" TO INSTALL, RUN: curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" TO INSTALL, RUN: 'curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+" THEN RUN: ':PlugInstall' in vim
 
 " Vim plugins
 call plug#begin()
