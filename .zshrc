@@ -30,6 +30,12 @@ alias tas='tmux attach-session -t'
 alias tl='tmux ls'
 alias p3='python3'
 
+cd()
+{
+  builtin cd $@
+  ls
+}
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Autocomplete
