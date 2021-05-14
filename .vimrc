@@ -47,16 +47,6 @@ Plug 'preservim/tagbar'
 " Toggle by :IndentLinesToggle
 Plug 'Yggdroot/indentLine'
 
-" More simple auto-complete
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'garbas/vim-snipmate'
-
-" Auto-complete plugins
-Plug 'Valloric/YouCompleteMe'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'ervandew/supertab'
-
 " Add a undo history
 Plug 'mbbill/undotree'
 
@@ -74,16 +64,6 @@ nmap <leader>P <Plug>yankstack_substitute_newer_paste
 " Close NerdTree if last file opened
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
-"
-" Use tab to expand trigger with ultisnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
-
 " Function windowed plugin keybindings
 nmap <F6> :NERDTreeToggle<CR>
 nnoremap <F5> :UndotreeToggle<CR>
@@ -91,6 +71,7 @@ nmap <F8> :TagbarToggle<CR>
 
 " Remove the press enter prompt
 " silent !<command>
+
 " No .*.swp files
 set noswapfile
 
