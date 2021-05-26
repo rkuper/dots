@@ -112,7 +112,6 @@ hi TabLine ctermfg=Black ctermbg=LightGray
 hi TabLineSel ctermfg=Black ctermbg=Yellow
 
 " Search highlighting
-set cursorline
 set ignorecase
 set smartcase
 set showmatch
@@ -120,6 +119,10 @@ set incsearch
 set hlsearch
 hi Search ctermbg=Red
 hi Search ctermfg=LightGray
+
+" Cursor Line Highlighing
+highlight CursorLine cterm=NONE ctermbg=0x434C5E ctermfg=NONE guibg=NONE guifg=NONE
+set cursorline
 
 " Set up proper indenting
 set smartindent
