@@ -90,7 +90,8 @@ set visualbell
 " Set the tabs to be 4 spaces
 set tabstop=4
 set softtabstop=4
-"set expandtab
+set expandtab
+set smarttab
 
 " Set the mouse to scroll the screen and select
 set mouse=a
@@ -171,4 +172,3 @@ let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 
 let g:airline#extensions#tagbar#enabled = 1
-
