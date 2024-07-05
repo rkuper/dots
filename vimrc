@@ -51,6 +51,17 @@ Plug 'preservim/tagbar'
 " Add a undo history
 Plug 'mbbill/undotree'
 
+" Floaty terminal inside of vim
+Plug 'voldikss/vim-floaterm'
+
+" Start page for vim
+Plug 'mhinz/vim-startify'
+
+" LSP and autocomplete support
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+Plug 'prabirshrestha/asyncomplete.vim'
+
 call plug#end()
 
 
@@ -150,12 +161,8 @@ set wildmenu
 set showcmd
 
 " Colors and themes
-if !has('gui_running') && &term =~ '^\%(screen\|tmux\)'
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-endif
 syntax on
-set termguicolors
+" set termguicolors
 colorscheme nord
 
 " Search highlighting
@@ -175,9 +182,11 @@ hi TabLineSel  ctermfg=Black ctermbg=Yellow
 highlight CursorLine cterm=NONE ctermbg=0x434C5E ctermfg=NONE guibg=NONE guifg=NONE
 set cursorline
 
-" Set up 120 character width
-highlight ColorColumn ctermbg=0x434C5E
-set colorcolumn=120
+" Set up 120 character width (highlight anything beyond it)
+augroup vimrc_autocmds
+  autocmd BufEnter * highlight OverLength ctermbg=red guibg=red ctermfg=white guifg=white
+  autocmd BufEnter * match OverLength /\%120v.*/
+augroup END
 
 " Auto remove whitespace at end of lines when saving file
 autocmd BufWritePre * %s/\s\+$//e
