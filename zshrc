@@ -18,7 +18,7 @@ compinit
 
 # Adjust prompt and directory colors
 autoload -U colors && colors
-export PS1="[%{$fg[cyan]%}%m%{$reset_color%}:%{$fg[yellow]%}%~%{$reset_color%}]$ "
+export PS1="[%{$fg[cyan]%}%m%{$reset_color%}:%{$fg[yellow]%}%3~%{$reset_color%}]$ "
 # For Bash: export PS1=\
 #   \[\e[37m\][\[\e[m\]\[\e[36m\]\h\[\e[m\]\[\e[37m\]:\[\e[33m\]\w\[\e[m\]\[\e[37m\]]\[\e[m\]\[\e[37m\]\\$\[\e[m\] "
 test -r ~/.dir_colors && eval $(dircolors ~/.dir_colors)
