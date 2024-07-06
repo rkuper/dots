@@ -26,6 +26,13 @@ test -r ~/.dir_colors && eval $(dircolors ~/.dir_colors)
 # Setup for environment variables
 export PATH="$PATH:/home/$USER/.local/bin"
 
+export FZF_DEFAULT_OPTS=" \
+          --preview 'batcat --theme=Nord --color=always --style=numbers --line-range=:500 {}' \
+          --margin 10% --border \
+          --color=fg:#e5e9f0,bg:#2e3440,hl:#81a1c1 --color=fg+:#e5e9f0,bg+:#2e3440,hl+:#81a1c1 \
+          --color=info:#eacb8a,prompt:#bf6069,pointer:#b48dac --color=marker:#a3be8b,spinner:#b48dac,header:#a3be8b"
+export FZF_COMPLETION_TRIGGER='\\'
+
 
 
 ###################################
@@ -51,15 +58,8 @@ alias p3='python3'
 alias sc='source ~/.zshrc'
 alias pdf='xdg-open'
 alias cpc='sudo sysctl vm.drop_caches=1'
-alias f="~/.local/bin/fzf --preview 'batcat --theme=Nord --color=always --style=numbers --line-range=:500 {}' \
-        --margin 10% --border rounded \
-        --color=fg:#e5e9f0,bg:#2e3440,hl:#81a1c1 --color=fg+:#e5e9f0,bg+:#2e3440,hl+:#81a1c1 \
-        --color=info:#eacb8a,prompt:#bf6069,pointer:#b48dac --color=marker:#a3be8b,spinner:#b48dac,header:#a3be8b \
-        --bind 'enter:become(vim \"+autocmd VimEnter * NERDTree\" \"+autocmd VimEnter * Tagbar\" {})'"
-alias fzf="~/.local/bin/fzf --preview 'batcat --theme=Nord --color=always --style=numbers --line-range=:500 {}' \
-          --margin 10% --border rounded \
-          --color=fg:#e5e9f0,bg:#2e3440,hl:#81a1c1 --color=fg+:#e5e9f0,bg+:#2e3440,hl+:#81a1c1 \
-          --color=info:#eacb8a,prompt:#bf6069,pointer:#b48dac --color=marker:#a3be8b,spinner:#b48dac,header:#a3be8b"
+alias f="~/.local/bin/fzf --bind 'enter:become(vim \"+autocmd VimEnter * NERDTree\" \"+autocmd VimEnter * Tagbar\" {})'"
+alias fzf="~/.local/bin/fzf"
 alias wave='/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=gtkwave io.github.gtkwave.GTKWave -f'
 alias ver='rm -rf objs; verilator --timing --main --trace --sv -cc --Mdir ./objs'
 alias lg='~/.local/bin/lazygit'

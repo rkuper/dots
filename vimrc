@@ -169,7 +169,7 @@ set showcmd
 "   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 " endif
 syntax on
-" set termguicolors
+set termguicolors
 colorscheme nord
 
 " Search highlighting
@@ -207,6 +207,10 @@ set paste
 
 " Open the existing NERDTree on each new tab.
 autocmd BufWinEnter * if getcmdwintype() == '' && &buftype != 'quickfix' | silent! NERDTreeMirror | endif
+
+" let $FZF_DEFAULT_OPTS = "$FZF_DEFAULT_OPTS"
+let $FZF_DEFAULT_OPTS = substitute($FZF_DEFAULT_OPTS, "--margin 10%", "", "")
+let g:floaterm_autoclose = 2
 
 
 
