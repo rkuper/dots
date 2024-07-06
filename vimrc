@@ -200,6 +200,8 @@ autocmd BufWritePre * %s/\s\+$//e
 
 " Set the tabs to be 2 spaces
 set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set expandtab
 set paste
 
@@ -240,3 +242,5 @@ let g:airline_right_alt_sep      = ''
 let g:airline_symbols.branch     = ''
 let g:airline_symbols.readonly   = ''
 let g:airline_symbols.linenr     = ''
+
+set expandtab
