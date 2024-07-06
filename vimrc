@@ -77,6 +77,9 @@ map <leader>ss :setlocal spell!<cr>
 noremap <leader>F :Files<cr>
 noremap <leader>T :Tags<cr>
 noremap <leader>B :Buffers<cr>
+noremap <leader>M :Marks<cr>
+noremap <leader>R :Rg<cr>
+noremap <leader>N :FloatermNew<cr>
 noremap <leader>b :bp<cr>
 
 " Use ctrl-[hjkl] to select the active split
@@ -161,6 +164,10 @@ set wildmenu
 set showcmd
 
 " Colors and themes
+" if !has('gui_running') && &term =~ '^\%(screen\|tmux\)'
+"   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+"   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+" endif
 syntax on
 " set termguicolors
 colorscheme nord
@@ -195,6 +202,9 @@ autocmd BufWritePre * %s/\s\+$//e
 set tabstop=2
 set expandtab
 set paste
+
+" Open the existing NERDTree on each new tab.
+autocmd BufWinEnter * if getcmdwintype() == '' && &buftype != 'quickfix' | silent! NERDTreeMirror | endif
 
 
 
