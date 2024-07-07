@@ -13,25 +13,28 @@
 HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=1000
+
+# Completion
 autoload -Uz compinit
 compinit
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 # Adjust prompt and directory colors
 autoload -U colors && colors
 export PS1="[%{$fg[cyan]%}%m%{$reset_color%}:%{$fg[yellow]%}%3~%{$reset_color%}]$ "
-# For Bash: export PS1=\
-#   \[\e[37m\][\[\e[m\]\[\e[36m\]\h\[\e[m\]\[\e[37m\]:\[\e[33m\]\w\[\e[m\]\[\e[37m\]]\[\e[m\]\[\e[37m\]\\$\[\e[m\] "
 test -r ~/.dir_colors && eval $(dircolors ~/.dir_colors)
 
 # Setup for environment variables
 export PATH="$PATH:/home/$USER/.local/bin"
 
+# FZF styling
 export FZF_DEFAULT_OPTS=" \
           --preview 'batcat --theme=Nord --color=always --style=numbers --line-range=:500 {}' \
-          --margin 10% --border \
-          --color=fg:#e5e9f0,bg:#2e3440,hl:#81a1c1 --color=fg+:#e5e9f0,bg+:#2e3440,hl+:#81a1c1 \
-          --color=info:#eacb8a,prompt:#bf6069,pointer:#b48dac --color=marker:#a3be8b,spinner:#b48dac,header:#a3be8b"
+          --margin 10% --border -m "
+          # --color=fg:#e5e9f0,bg:#2e3440,hl:#81a1c1 --color=fg+:#e5e9f0,bg+:#2e3440,hl+:#81a1c1 \
+          # --color=info:#eacb8a,prompt:#bf6069,pointer:#b48dac --color=marker:#a3be8b,spinner:#b48dac,header:#a3be8b"
 export FZF_COMPLETION_TRIGGER='\\'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
 
 
@@ -58,7 +61,8 @@ alias p3='python3'
 alias sc='source ~/.zshrc'
 alias pdf='xdg-open'
 alias cpc='sudo sysctl vm.drop_caches=1'
-alias f="~/.local/bin/fzf --bind 'enter:become(vim \"+autocmd VimEnter * NERDTree\" \"+autocmd VimEnter * Tagbar\" {})'"
+alias f="~/.local/bin/fzf --bind \
+        'enter:become(vim -p \"+autocmd VimEnter * NERDTree\" \"+autocmd VimEnter * Tagbar\" {+})'"
 alias fzf="~/.local/bin/fzf"
 alias wave='/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=gtkwave io.github.gtkwave.GTKWave -f'
 alias ver='rm -rf objs; verilator --timing --main --trace --sv -cc --Mdir ./objs'
@@ -193,4 +197,5 @@ antigen bundle command-not-found
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-autocomplete
+antigen bundle Aloxaf/fzf-tab
 antigen apply

@@ -62,6 +62,11 @@ Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
 Plug 'prabirshrestha/asyncomplete.vim'
 
+" Productivity tools
+" Plug 'itchyny/calendar.vim'
+Plug 'vimwiki/vimwiki'
+Plug 'vim-pandoc/vim-pandoc'
+
 call plug#end()
 
 
@@ -168,8 +173,8 @@ set showcmd
 "   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 "   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 " endif
+" set termguicolors
 syntax on
-set termguicolors
 colorscheme nord
 
 " Search highlighting
@@ -195,6 +200,7 @@ augroup vimrc_autocmds
   autocmd BufEnter * match OverLength /\%120v.*/
 augroup END
 
+
 " Auto remove whitespace at end of lines when saving file
 autocmd BufWritePre * %s/\s\+$//e
 
@@ -208,9 +214,21 @@ set paste
 " Open the existing NERDTree on each new tab.
 autocmd BufWinEnter * if getcmdwintype() == '' && &buftype != 'quickfix' | silent! NERDTreeMirror | endif
 
-" let $FZF_DEFAULT_OPTS = "$FZF_DEFAULT_OPTS"
-let $FZF_DEFAULT_OPTS = substitute($FZF_DEFAULT_OPTS, "--margin 10%", "", "")
+" Remove margins for fzf in vim since the window already floats
+let $FZF_DEFAULT_OPTS = ""
+" substitute($FZF_DEFAULT_OPTS, "--margin 10%", "", "")
+
+" Close terminal automatically once shell exits
 let g:floaterm_autoclose = 2
+
+" Needed for vimwiki
+set nocompatible
+filetype plugin on
+
+" Adjust syntax and pathing for vimwiki
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': 'md'}]
+let g:vimwiki_global_ext = 0
 
 
 
