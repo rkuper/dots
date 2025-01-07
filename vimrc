@@ -22,7 +22,7 @@ Plug 'preservim/vim-markdown'
 
 " Status line and color scheme
 Plug 'vim-airline/vim-airline'
-Plug 'arcticicestudio/nord-vim', { 'branch': 'develop' }
+Plug 'nordtheme/vim'
 
 " Git stuff
 Plug 'tpope/vim-fugitive'
@@ -58,9 +58,9 @@ Plug 'voldikss/vim-floaterm'
 Plug 'mhinz/vim-startify'
 
 " LSP and autocomplete support
-Plug 'prabirshrestha/vim-lsp'
-Plug 'mattn/vim-lsp-settings'
-Plug 'prabirshrestha/asyncomplete.vim'
+" Plug 'prabirshrestha/vim-lsp'
+" Plug 'mattn/vim-lsp-settings'
+" Plug 'prabirshrestha/asyncomplete.vim'
 
 " Productivity tools
 " Plug 'itchyny/calendar.vim'
@@ -75,17 +75,26 @@ call plug#end()
 "      VIM Remappings      "
 """"""""""""""""""""""""""""
 
+" Change leader key to space
+let mapleader = " "
+
 " Remapping plug keybindings
 map <leader>ss :setlocal spell!<cr>
 
 " Easy access to files and tags with simple leader key
 noremap <leader>F :Files<cr>
 noremap <leader>T :Tags<cr>
-noremap <leader>B :Buffers<cr>
+noremap <leader>b :Buffers<cr>
 noremap <leader>M :Marks<cr>
 noremap <leader>R :Rg<cr>
 noremap <leader>N :FloatermNew<cr>
-noremap <leader>b :bp<cr>
+noremap <leader>B :bp<cr>
+noremap <leader>s yiw/<c-r>"<cr>
+noremap <leader>r :source ~/.vimrc<cr>
+
+" Quick toggle floating terminal
+nnoremap <silent> @@ :FloatermToggle<cr>
+tnoremap <silent> @@ <c-\><c-n>:FloatermToggle<cr>
 
 " Use ctrl-[hjkl] to select the active split
 nmap <silent> <c-k> :wincmd k<cr>
@@ -136,10 +145,10 @@ nnoremap <s-left>  <c-w>h
 nnoremap <s-right> <c-w>l
 
 " Easier word/line movement with using control arrows
-nnoremap <C-Up>    :-3<CR>
-nnoremap <C-Down>  :+3<CR>
-nnoremap <C-Left>  b
-nnoremap <C-Right> w
+nnoremap <s-up>    :-3<cr>
+nnoremap <s-down>  :+3<cr>
+nnoremap <s-left>  b
+nnoremap <s-right> w
 
 
 
@@ -204,12 +213,14 @@ augroup END
 " Auto remove whitespace at end of lines when saving file
 autocmd BufWritePre * %s/\s\+$//e
 
+" Set better formatted pasting
+set paste
+
 " Set the tabs to be 2 spaces
 set tabstop=2
-set shiftwidth=2
 set softtabstop=2
+set shiftwidth=2
 set expandtab
-set paste
 
 " Open the existing NERDTree on each new tab.
 autocmd BufWinEnter * if getcmdwintype() == '' && &buftype != 'quickfix' | silent! NERDTreeMirror | endif
@@ -230,11 +241,18 @@ let g:vimwiki_list = [{'path': '~/vimwiki/',
                       \ 'syntax': 'markdown', 'ext': 'md'}]
 let g:vimwiki_global_ext = 0
 
+" Use undo file and use specific undo directory
+set undofile
+set undodir=/home/$USER/.vimundo/
 
 
-""""""""""""""""""""""""""""
-"   Airline Plug Configs   "
-""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""
+"   Plugin Settings Configs   "
+"""""""""""""""""""""""""""""""
+
+" Set width and height of floatterm windows
+let g:floaterm_width = 0.75
+let g:floaterm_height = 0.75
 
 " air-line
 let g:airline#extensions#tagbar#enabled = 1
@@ -265,4 +283,5 @@ let g:airline_symbols.branch     = ''
 let g:airline_symbols.readonly   = ''
 let g:airline_symbols.linenr     = ''
 
-set expandtab
+"  Allow for adjusting tab settings for python files
+let g:python_recommended_style = 0

@@ -14,7 +14,7 @@ HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=1000
 
-# Completion
+# Text completion
 autoload -Uz compinit
 compinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
@@ -61,9 +61,9 @@ alias p3='python3'
 alias sc='source ~/.zshrc'
 alias pdf='xdg-open'
 alias cpc='sudo sysctl vm.drop_caches=1'
-alias f="~/.local/bin/fzf --bind \
+alias f="fzf --bind \
         'enter:become(vim -p \"+autocmd VimEnter * NERDTree\" \"+autocmd VimEnter * Tagbar\" {+})'"
-alias fzf="~/.local/bin/fzf"
+# alias fzf="~/.local/bin/fzf"
 alias wave='/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=gtkwave io.github.gtkwave.GTKWave -f'
 alias ver='rm -rf objs; verilator --timing --main --trace --sv -cc --Mdir ./objs'
 alias lg='~/.local/bin/lazygit'
@@ -180,8 +180,8 @@ cd()
 ###################################
 
 # Add fzf support
-source <(~/.local/bin/fzf --zsh)
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# source <(fzf --zsh)
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Create antigen file through: curl -L git.io/antigen > antigen.zsh
 source ~/antigen.zsh
@@ -197,5 +197,5 @@ antigen bundle command-not-found
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-autocomplete
-antigen bundle Aloxaf/fzf-tab
+# antigen bundle Aloxaf/fzf-tab
 antigen apply
