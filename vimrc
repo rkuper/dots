@@ -57,6 +57,9 @@ Plug 'voldikss/vim-floaterm'
 " Start page for vim
 Plug 'mhinz/vim-startify'
 
+" Window swaps
+Plug 'wesQ3/vim-windowswap'
+
 " LSP and autocomplete support
 " Plug 'prabirshrestha/vim-lsp'
 " Plug 'mattn/vim-lsp-settings'
@@ -66,6 +69,7 @@ Plug 'mhinz/vim-startify'
 " Plug 'itchyny/calendar.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'vim-pandoc/vim-pandoc'
+" Plug 'lervag/wiki.vim'
 
 call plug#end()
 
@@ -82,25 +86,28 @@ let mapleader = " "
 map <leader>ss :setlocal spell!<cr>
 
 " Easy access to files and tags with simple leader key
-noremap <leader>F :Files<cr>
-noremap <leader>T :Tags<cr>
-noremap <leader>b :Buffers<cr>
-noremap <leader>M :Marks<cr>
-noremap <leader>R :Rg<cr>
-noremap <leader>N :FloatermNew<cr>
-noremap <leader>B :bp<cr>
-noremap <leader>s yiw/<c-r>"<cr>
-noremap <leader>r :source ~/.vimrc<cr>
+noremap <leader>F     :Files<cr>
+noremap <leader>T     :Tags<cr>
+noremap <leader>b     :Buffers<cr>
+noremap <leader>M     :Marks<cr>
+noremap <leader>L     :<cr>
+noremap <leader>G     :<cr>
+noremap <leader>R     :Rg<cr>
+noremap <leader>B     :bp<cr>
+noremap <leader>s     yiw/<c-r>"<cr>
+noremap <leader>h     :syntax off<cr>
+noremap <leader>r     :source ~/.vimrc<cr>
+noremap <leader><c-s> :mksession! ~/.recent_session.vim<cr>
+noremap <leader><c-r> :source ~/.recent_session.vim<cr>
+noremap <leader>e     :e!<cr>
 
 " Quick toggle floating terminal
+nnoremap <silent> @N :FloatermNew<cr>
+tnoremap <silent> @N <c-\><c-n>:FloatermNew<cr>
+nnoremap <silent> @n :FloatermNext<cr>
+tnoremap <silent> @n <c-\><c-n>:FloatermNext<cr>
 nnoremap <silent> @@ :FloatermToggle<cr>
 tnoremap <silent> @@ <c-\><c-n>:FloatermToggle<cr>
-
-" Use ctrl-[hjkl] to select the active split
-nmap <silent> <c-k> :wincmd k<cr>
-nmap <silent> <c-j> :wincmd j<cr>
-nmap <silent> <c-h> :wincmd h<cr>
-nmap <silent> <c-l> :wincmd l<cr>
 
 " Fixing some odd key mappings in some terminal emulators
 map [1;5A <c-up>
@@ -139,8 +146,8 @@ nnoremap <c-w><c-v>f :exec "vert norm <c-v><c-w>f"<cr>
 nnoremap <c-w><c-v>[ :exec "vert norm <c-v><c-w>["<cr>
 
 " Remap moving around in file using shift
-nnoremap <s-up>    <c-w>j
-nnoremap <s-down>  <c-w>k
+nnoremap <s-up>    <c-w>k
+nnoremap <s-down>  <c-w>j
 nnoremap <s-left>  <c-w>h
 nnoremap <s-right> <c-w>l
 
@@ -150,11 +157,25 @@ nnoremap <s-down>  :+3<cr>
 nnoremap <s-left>  b
 nnoremap <s-right> w
 
+nnoremap <silent> <leader>< :vertical resize -4<cr>
+nnoremap <silent> <leader>> :vertical resize +4<cr>
+nnoremap <silent> <leader>= <c-w>=
+
+let g:windowswap_map_keys = 0
+nnoremap <silent> <leader>S :call WindowSwap#EasyWindowSwap()<cr>
+
+nnoremap <leader>zi :tab split<cr>
+nnoremap <leader>zo :tab close<cr>
+
 
 
 """"""""""""""""""""""""""""
 "     General Settings     "
 """"""""""""""""""""""""""""
+
+" Set the map leader
+nnoremap <SPACE> <Nop>
+map <Space> <Leader>
 
 " Close NerdTree if last file opened
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -168,21 +189,20 @@ set number
 set showmatch
 set visualbell
 
+" Allow normal pasting
+set paste
+
 " Set the mouse to scroll the screen and select
 set mouse=a
 
 " Autocomplete file tabbing in cmd mode
+set wildmode=longest,list,full
 set wildmenu
 
 " Show currently typed commands on bottom of vim screen
 set showcmd
 
 " Colors and themes
-" if !has('gui_running') && &term =~ '^\%(screen\|tmux\)'
-"   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-"   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-" endif
-" set termguicolors
 syntax on
 colorscheme nord
 
@@ -204,30 +224,19 @@ highlight CursorLine cterm=NONE ctermbg=0x434C5E ctermfg=NONE guibg=NONE guifg=N
 set cursorline
 
 " Set up 120 character width (highlight anything beyond it)
-augroup vimrc_autocmds
-  autocmd BufEnter * highlight OverLength ctermbg=red guibg=red ctermfg=white guifg=white
-  autocmd BufEnter * match OverLength /\%120v.*/
-augroup END
-
+" augroup vimrc_autocmds
+"   autocmd BufEnter * highlight OverLength ctermbg=red guibg=red ctermfg=white guifg=white
+"   autocmd BufEnter * match OverLength /\%120v.*/
+" augroup END
 
 " Auto remove whitespace at end of lines when saving file
-autocmd BufWritePre * %s/\s\+$//e
-
-" Set better formatted pasting
-set paste
-
-" Set the tabs to be 2 spaces
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
-set expandtab
+" autocmd BufWritePre * %s/\s\+$//e
 
 " Open the existing NERDTree on each new tab.
-autocmd BufWinEnter * if getcmdwintype() == '' && &buftype != 'quickfix' | silent! NERDTreeMirror | endif
+" autocmd BufWinEnter * if getcmdwintype() == '' && &buftype != 'quickfix' | silent! NERDTreeMirror | endif
 
 " Remove margins for fzf in vim since the window already floats
 let $FZF_DEFAULT_OPTS = ""
-" substitute($FZF_DEFAULT_OPTS, "--margin 10%", "", "")
 
 " Close terminal automatically once shell exits
 let g:floaterm_autoclose = 2
@@ -241,9 +250,22 @@ let g:vimwiki_list = [{'path': '~/vimwiki/',
                       \ 'syntax': 'markdown', 'ext': 'md'}]
 let g:vimwiki_global_ext = 0
 
+" Wikivim directory
+" let g:wiki_root = '~/.wiki'
+
+" Fix backspace on some systems
+set backspace=indent,eol,start
+
+if has("mouse_sgr")
+  set ttymouse=sgr
+else
+  set ttymouse=xterm2
+end
+
 " Use undo file and use specific undo directory
 set undofile
 set undodir=/home/$USER/.vimundo/
+
 
 
 """""""""""""""""""""""""""""""
@@ -285,3 +307,45 @@ let g:airline_symbols.linenr     = ''
 
 "  Allow for adjusting tab settings for python files
 let g:python_recommended_style = 0
+
+function! ToggleNumbers()
+  if &number || &relativenumber
+    set nonumber norelativenumber
+  else
+    set number relativenumber
+  endif
+endfunction
+nnoremap <leader>n :call ToggleNumbers()<cr>
+
+function! ToggleColumnHighlight()
+  if exists("g:column_highlight_enabled") && g:column_highlight_enabled
+    set colorcolumn=
+    let g:column_highlight_enabled = 0
+    echo "Column highlight disabled"
+  else
+    highlight ColorColumn ctermbg=red guibg=red ctermfg=white guifg=white
+    set colorcolumn=120
+    let g:column_highlight_enabled = 1
+    echo "Column highlight enabled at 120"
+  endif
+endfunction
+nnoremap <leader>h :call ToggleColumnHighlight()<cr>
+
+function! UseTabs()
+  set tabstop=4
+  set shiftwidth=4
+  set noexpandtab
+  set autoindent
+endfunction
+
+function! UseSpaces()
+  set tabstop=2
+  set shiftwidth=2
+  set expandtab
+  set softtabstop=0
+  set autoindent
+  set smarttab
+endfunction
+
+call UseSpaces()
+au! BufWrite,FileWritePre *.py, *.c call UseSpaces()
