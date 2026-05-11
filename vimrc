@@ -100,6 +100,8 @@ noremap <leader>r     :source ~/.vimrc<cr>
 noremap <leader><c-s> :mksession! ~/.recent_session.vim<cr>
 noremap <leader><c-r> :source ~/.recent_session.vim<cr>
 noremap <leader>e     :e!<cr>
+noremap <leader>p     :set nospell<cr>
+noremap <leader>w     :w<cr>
 
 " Quick toggle floating terminal
 nnoremap <silent> @N :FloatermNew<cr>
@@ -152,10 +154,20 @@ nnoremap <s-left>  <c-w>h
 nnoremap <s-right> <c-w>l
 
 " Easier word/line movement with using control arrows
-nnoremap <s-up>    :-3<cr>
-nnoremap <s-down>  :+3<cr>
-nnoremap <s-left>  b
-nnoremap <s-right> w
+nnoremap <silent> <s-up>    9k
+nnoremap <silent> <s-down>  9j
+nnoremap <silent> <s-left>  9h
+nnoremap <silent> <s-right> 9l
+
+inoremap <silent> <s-up>    <esc>9ka
+inoremap <silent> <s-down>  <esc>9ja
+inoremap <silent> <s-left>  <esc>9ha
+inoremap <silent> <s-right> <esc>9la
+
+nnoremap <silent> <s-k> 9k
+nnoremap <silent> <s-j> 9j
+nnoremap <silent> <s-h> 9h
+nnoremap <silent> <s-l> 9l
 
 nnoremap <silent> <leader>< :vertical resize -4<cr>
 nnoremap <silent> <leader>> :vertical resize +4<cr>
@@ -222,6 +234,7 @@ hi TabLineSel  ctermfg=Black ctermbg=Yellow
 " Cursor Line Highlighing
 highlight CursorLine cterm=NONE ctermbg=0x434C5E ctermfg=NONE guibg=NONE guifg=NONE
 set cursorline
+set cursorcolumn
 
 " Set up 120 character width (highlight anything beyond it)
 " augroup vimrc_autocmds
