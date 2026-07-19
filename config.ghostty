@@ -1,0 +1,36 @@
+font-family = "Source Code Pro"
+font-size = 8
+cursor-style = bar
+scrollbar = never
+background = #2e3440
+foreground = #eceff4
+window-decoration = none
+background-opacity = 1.0
+
+palette =  0=#3B4252
+palette =  1=#BF616A
+palette =  2=#A3BE8C
+palette =  3=#EBCB8B
+palette =  4=#81A1C1
+palette =  5=#B48EAD
+palette =  6=#88C0D0
+palette =  7=#E5E9F0
+palette =  8=#4C566A
+palette =  9=#BF616A
+palette =  10=#A3BE8C
+palette =  11=#EBCB8B
+palette =  12=#81A1C1
+palette =  13=#B48EAD
+palette =  14=#8FBCBB
+palette =  15=#ECEFF4
+
+keybind = performable:ctrl+c=copy_to_clipboard
+keybind = ctrl+v=paste_from_clipboard
+
+keybind = ctrl+shift+v=text:\x16
+keybind = ctrl+shift+j=unbind
+
+clipboard-paste-protection = false
+
+mouse-scroll-multiplier = 0.5
+term = xterm-256color

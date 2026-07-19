@@ -78,49 +78,43 @@ call plug#end()
 """"""""""""""""""""""""""""
 "      VIM Remappings      "
 """"""""""""""""""""""""""""
-
-" Change leader key to space
-let mapleader = " "
+" nnoremap <SPACE> <Nop>
+let mapleader = ' '
 
 " Remapping plug keybindings
 map <leader>ss :setlocal spell!<cr>
 
 " Easy access to files and tags with simple leader key
-noremap <leader>F     :Files<cr>
-noremap <leader>T     :Tags<cr>
-noremap <leader>b     :Buffers<cr>
-noremap <leader>M     :Marks<cr>
-noremap <leader>L     :<cr>
-noremap <leader>G     :<cr>
-noremap <leader>R     :Rg<cr>
-noremap <leader>B     :bp<cr>
-noremap <leader>s     yiw/<c-r>"<cr>
-noremap <leader>h     :syntax off<cr>
-noremap <leader>r     :source ~/.vimrc<cr>
-noremap <leader><c-s> :mksession! ~/.recent_session.vim<cr>
-noremap <leader><c-r> :source ~/.recent_session.vim<cr>
-noremap <leader>e     :e!<cr>
-noremap <leader>p     :set nospell<cr>
-noremap <leader>w     :w<cr>
+noremap <leader>F :Files<cr>
+noremap <leader>T :Tags<cr>
+noremap <leader>b :Buffers<cr>
+noremap <leader>M :Marks<cr>
+noremap <leader>L :Lines<cr>
+noremap <leader>G :BLines<cr>
+noremap <leader>R :Rg<cr>
+noremap <leader>B :bp<cr>
+noremap <leader>s yiw/<c-r>"<cr>N
+noremap <leader>r :source ~/.vimrc<cr>
+noremap <leader><c-s> :mksession! ~/recent_session.vim<cr>
+noremap <leader><c-r> :source ~/recent_session.vim<cr>
+noremap <leader>e :e!<cr>
+noremap <leader>p :set nospell<cr>
+noremap <leader>w :w<cr>
 
-" Quick toggle floating terminal
-nnoremap <silent> @N :FloatermNew<cr>
-tnoremap <silent> @N <c-\><c-n>:FloatermNew<cr>
-nnoremap <silent> @n :FloatermNext<cr>
-tnoremap <silent> @n <c-\><c-n>:FloatermNext<cr>
-nnoremap <silent> @@ :FloatermToggle<cr>
-tnoremap <silent> @@ <c-\><c-n>:FloatermToggle<cr>
+nnoremap <silent> @N :FloatermNew<CR>
+tnoremap <silent> @N <C-\><C-n>:FloatermNew<CR>
+nnoremap <silent> @n :FloatermNext<CR>
+tnoremap <silent> @n <C-\><C-n>:FloatermNext<CR>
+nnoremap <silent> @@ :FloatermToggle<CR>
+tnoremap <silent> @@ <C-\><C-n>:FloatermToggle<CR>
 
-" Fixing some odd key mappings in some terminal emulators
-map [1;5A <c-up>
-map [1;5B <c-down>
-map [1;5D <c-left>
-map [1;5C <c-right>
-
-map [1;2A <s-up>
-map [1;2B <s-down>
-map [1;2D <s-left>
-map [1;2C <s-right>
+" Decode xterm-style modified arrows before mapping them.
+silent! execute "set <xUp>=\<Esc>[@;*A"
+silent! execute "set <xDown>=\<Esc>[@;*B"
+silent! execute "set <xRight>=\<Esc>[@;*C"
+silent! execute "set <xLeft>=\<Esc>[@;*D"
+set ttimeout
+set ttimeoutlen=100
 
 " Quick remappings for tabs
 noremap <leader>1 1gt
@@ -136,7 +130,7 @@ noremap <leader>0 :tablest<CR>
 noremap <leader>] gt
 
 " Remove highlighting
-nnoremap <return> :noh<CR>
+nnoremap <leader><return> :noh<CR>
 
 " Function windowed plugin keybindings
 nmap     <f6> :NERDTreeToggle<cr>
@@ -144,37 +138,47 @@ nmap     <f7> :TagbarToggle<cr>
 nnoremap <f8> :UndotreeToggle<cr>
 
 " Vertical splitting for opening tags
-nnoremap <c-w><c-v>f :exec "vert norm <c-v><c-w>f"<cr>
-nnoremap <c-w><c-v>[ :exec "vert norm <c-v><c-w>["<cr>
+nnoremap <c-w><c-v>f :exec 'vert norm <c-v><c-w>f'<cr>
+nnoremap <c-w><c-v>[ :exec 'vert norm <c-v><c-w>['<cr>
 
-" Remap moving around in file using shift
-nnoremap <s-up>    <c-w>k
-nnoremap <s-down>  <c-w>j
-nnoremap <s-left>  <c-w>h
-nnoremap <s-right> <c-w>l
+" Remap moving around in splits using shift
+nnoremap <c-up>    <c-w>k
+nnoremap <c-down>  <c-w>j
+nnoremap <c-left>  <c-w>h
+nnoremap <c-right> <c-w>l
 
-" Easier word/line movement with using control arrows
-nnoremap <silent> <s-up>    9k
-nnoremap <silent> <s-down>  9j
-nnoremap <silent> <s-left>  9h
-nnoremap <silent> <s-right> 9l
+" Easier line/column movement with shift keys
+nnoremap <silent> <s-up>    10k
+nnoremap <silent> <s-down>  10j
+nnoremap <silent> <s-left>  10h
+nnoremap <silent> <s-right> 10l
 
-inoremap <silent> <s-up>    <esc>9ka
-inoremap <silent> <s-down>  <esc>9ja
-inoremap <silent> <s-left>  <esc>9ha
-inoremap <silent> <s-right> <esc>9la
+xnoremap <silent> <s-up>    10k
+xnoremap <silent> <s-down>  10j
+xnoremap <silent> <s-left>  10h
+xnoremap <silent> <s-right> 10l
 
-nnoremap <silent> <s-k> 9k
-nnoremap <silent> <s-j> 9j
-nnoremap <silent> <s-h> 9h
-nnoremap <silent> <s-l> 9l
+inoremap <silent> <s-up>    <C-o>10k
+inoremap <silent> <s-down>  <C-o>10j
+inoremap <silent> <s-left>  <C-o>10h
+inoremap <silent> <s-right> <C-o>10l
 
-nnoremap <silent> <leader>< :vertical resize -4<cr>
-nnoremap <silent> <leader>> :vertical resize +4<cr>
-nnoremap <silent> <leader>= <c-w>=
+nnoremap <silent> <s-k> 10k
+nnoremap <silent> <s-j> 10j
+nnoremap <silent> <s-h> 10h
+nnoremap <silent> <s-l> 10l
 
-let g:windowswap_map_keys = 0
-nnoremap <silent> <leader>S :call WindowSwap#EasyWindowSwap()<cr>
+xnoremap <silent> <s-k> 10k
+xnoremap <silent> <s-j> 10j
+xnoremap <silent> <s-h> 10h
+xnoremap <silent> <s-l> 10l
+
+nnoremap <silent> <leader>< :vertical resize -4<CR>
+nnoremap <silent> <leader>> :vertical resize +4<CR>
+nnoremap <leader>= <c-w>=
+
+let g:windowswap_map_keys = 0 "prevent default bindings
+nnoremap <silent> <leader>S :call WindowSwap#EasyWindowSwap()<CR>
 
 nnoremap <leader>zi :tab split<cr>
 nnoremap <leader>zo :tab close<cr>
@@ -201,10 +205,10 @@ set number
 set showmatch
 set visualbell
 
-" Allow normal pasting
-set paste
+" Keep paste mode off so insert-mode mappings work; bracketed paste handles normal terminal pastes.
+set nopaste
 
-" Set the mouse to scroll the screen and select
+" Enable mouse and trackpad scroll support in terminal Vim.
 set mouse=a
 
 " Autocomplete file tabbing in cmd mode
@@ -216,9 +220,11 @@ set showcmd
 
 " Colors and themes
 syntax on
+" set termguicolors
 colorscheme nord
 
 " Search highlighting
+set ignorecase
 set smartcase
 set showmatch
 set incsearch
@@ -249,7 +255,7 @@ set cursorcolumn
 " autocmd BufWinEnter * if getcmdwintype() == '' && &buftype != 'quickfix' | silent! NERDTreeMirror | endif
 
 " Remove margins for fzf in vim since the window already floats
-let $FZF_DEFAULT_OPTS = ""
+let $FZF_DEFAULT_OPTS = ''
 
 " Close terminal automatically once shell exits
 let g:floaterm_autoclose = 2
@@ -259,14 +265,14 @@ set nocompatible
 filetype plugin on
 
 " Adjust syntax and pathing for vimwiki
-let g:vimwiki_list = [{'path': '~/vimwiki/',
+let g:vimwiki_list = [{'path': '~/.vimwiki/',
                       \ 'syntax': 'markdown', 'ext': 'md'}]
 let g:vimwiki_global_ext = 0
 
 " Wikivim directory
 " let g:wiki_root = '~/.wiki'
 
-" Fix backspace on some systems
+" Allow backspace to work
 set backspace=indent,eol,start
 
 if has("mouse_sgr")
@@ -275,51 +281,33 @@ else
   set ttymouse=xterm2
 end
 
-" Use undo file and use specific undo directory
+" tell it to use an undo file
 set undofile
-set undodir=/home/$USER/.vimundo/
+
+" Keep folding enabled, but start with all folds open
+set foldlevelstart=99
 
 
 
-"""""""""""""""""""""""""""""""
-"   Plugin Settings Configs   "
-"""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""
+"   Airline Plug Configs   "
+""""""""""""""""""""""""""""
+
+let g:floaterm_scroll_limit = 100000
 
 " Set width and height of floatterm windows
 let g:floaterm_width = 0.75
 let g:floaterm_height = 0.75
 
 " air-line
-let g:airline#extensions#tagbar#enabled = 1
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tagbar#enabled = 1
 
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
 
 " unicode symbols
-let g:airline_left_sep           = '»'
-let g:airline_left_sep           = '▶'
-let g:airline_right_sep          = '«'
-let g:airline_right_sep          = '◀'
-let g:airline_symbols.linenr     = '␊'
-let g:airline_symbols.linenr     = '␤'
-let g:airline_symbols.linenr     = '¶'
-let g:airline_symbols.branch     = '⎇'
-let g:airline_symbols.paste      = 'ρ'
-let g:airline_symbols.paste      = 'Þ'
-let g:airline_symbols.paste      = '∥'
-let g:airline_symbols.whitespace = 'Ξ'
-let g:airline_left_sep           = ''
-let g:airline_left_alt_sep       = ''
-let g:airline_right_sep          = ''
-let g:airline_right_alt_sep      = ''
-let g:airline_symbols.branch     = ''
-let g:airline_symbols.readonly   = ''
-let g:airline_symbols.linenr     = ''
-
-"  Allow for adjusting tab settings for python files
-let g:python_recommended_style = 0
 
 function! ToggleNumbers()
   if &number || &relativenumber
@@ -330,35 +318,51 @@ function! ToggleNumbers()
 endfunction
 nnoremap <leader>n :call ToggleNumbers()<cr>
 
+function! ToggleSyntax()
+  if exists("g:syntax_on")
+    syntax off
+  else
+    syntax on
+  endif
+endfunction
+nnoremap <leader>x :call ToggleSyntax()<cr>
+
 function! ToggleColumnHighlight()
   if exists("g:column_highlight_enabled") && g:column_highlight_enabled
     set colorcolumn=
     let g:column_highlight_enabled = 0
-    echo "Column highlight disabled"
+    echo 'Column highlight disabled'
   else
     highlight ColorColumn ctermbg=red guibg=red ctermfg=white guifg=white
     set colorcolumn=120
     let g:column_highlight_enabled = 1
-    echo "Column highlight enabled at 120"
+    echo 'Column highlight enabled at 120'
   endif
 endfunction
-nnoremap <leader>h :call ToggleColumnHighlight()<cr>
+nnoremap <leader>h :call ToggleColumnHighlight()<CR>
 
+" Set the tabs to be 2 spaces
 function! UseTabs()
-  set tabstop=4
-  set shiftwidth=4
-  set noexpandtab
-  set autoindent
+  set tabstop=4     " Size of a hard tabstop (ts).
+  set shiftwidth=4  " Size of an indentation (sw).
+  set noexpandtab   " Always uses tabs instead of space characters (noet).
+  set autoindent    " Copy indent from current line when starting a new line (ai).
 endfunction
 
-function! UseSpaces()
-  set tabstop=2
-  set shiftwidth=2
-  set expandtab
-  set softtabstop=0
-  set autoindent
-  set smarttab
+function! UseSpaces(...)
+  let l:spaces = a:0 ? a:1 : 2
+  if l:spaces <= 0
+    echoerr 'UseSpaces() requires a positive number of spaces'
+    return
+  endif
+
+  let &tabstop = l:spaces
+  let &shiftwidth = l:spaces
+  set expandtab     " Always uses spaces instead of tab characters (et).
+  let &softtabstop = l:spaces
+  set autoindent    " Copy indent from current line when starting a new line.
+  set smarttab      " Inserts blanks on a <Tab> key (as per sw, ts and sts).
 endfunction
 
 call UseSpaces()
-au! BufWrite,FileWritePre *.py, *.c call UseSpaces()
+au! BufWrite,FileWritePre *.py,*.c call UseSpaces()
